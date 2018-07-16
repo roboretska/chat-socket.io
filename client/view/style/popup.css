@@ -1,0 +1,48 @@
+#pop-up{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 45;
+    background-color: rgba(192,192,192, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.authorization-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border: 1px solid #918e91;
+}
+
+.autho-fields{
+    padding: 5px 10px 5px 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #eb7267;
+}
+
+.authorization-wrapper h3{
+    background-color: #669674;
+    color: aliceblue;
+    padding: 15px;
+
+}
+
+.button-wrapper{
+    padding: 5px;
+}
+.button-wrapper button{
+    border: 1px solid #918e91;
+    border-radius: 5px;
+    color: aliceblue;
+    float:right;
+    padding: 5px 10px;
+}
+
+.autho-fields input{
+    width: 95%;
+    margin-bottom: 15px;
+}
