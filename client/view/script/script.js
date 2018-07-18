@@ -2,7 +2,7 @@
 
     const messageInputButton = document.getElementById('message-input-button');
 
-    const socket = io.connect({'sync disconnect on unload': true });
+    const socket = io.connect({'sync disconnect on unload': true});
 
 
     NameEnter(socket);
@@ -10,7 +10,7 @@
         createUsersList(user);
     });
     socket.on('users list', function (users) {
-        users.forEach(item=>{
+        users.forEach(item => {
             createUsersList(item);
         })
 
@@ -47,15 +47,33 @@
 
     });
 
-   document.getElementById('message-input-field').onkeypress = function(){
-       socket.emit('user typing', sessionStorage.getItem('nickName'));
-       socket.on('is typing', function (user) {
-           console.log(user);
-       })
-   };
+    document.getElementById('message-input-field').onkeypress = function () {
+        socket.emit('user typing', sessionStorage.getItem('nickName'));
+        socket.on('is typing', function (message) {
+
+            if (!document.getElementsByClassName('typing-message').length) {
+                const container = document.getElementById('messages-container');
+
+                const userTypingMessage = document.createElement('li');
+                userTypingMessage.setAttribute("class", 'typing-message');
+                container.appendChild(userTypingMessage);
+                userTypingMessage.innerHTML = message;
+                console.log(message);
+            }
+        })
+    };
+
+    let timeout;
+    document.getElementById('message-input-field').onkeyup = function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+            document.getElementsByClassName('typing-message')[0].remove()
+        }, 1500);
+    }
 
 
-}());
+
+    }());
 
 
 function NameEnter(socket) {
@@ -72,7 +90,7 @@ function NameEnter(socket) {
             sessionStorage.setItem('userName', userNameField.value);
             sessionStorage.setItem('nickName', nickNameField.value);
             popUp.style.display = 'none';
-            socket.emit('new user', {'username' : userNameField.value, 'nickname':nickNameField.value});
+            socket.emit('new user', {'username': userNameField.value, 'nickname': nickNameField.value});
             // socket.on('new user', function (user) {
             //     const userNameField = document.getElementById('messages-container');
             //     userNameField.innerHTML = '';
@@ -101,12 +119,10 @@ function createMessageViews(message, i) {
             nicknameStart,
             message.text.indexOf(" ", nicknameStart)
         );
-        if(sessionStorage.getItem('nickName')===search){
+        if (sessionStorage.getItem('nickName') === search) {
             contentWrapper.setAttribute('class', 'private-message')
         }
     }
-
-
 
 
     const header = document.createElement('h5');
