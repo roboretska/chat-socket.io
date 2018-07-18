@@ -47,6 +47,14 @@
 
     });
 
+   document.getElementById('message-input-field').onkeypress = function(){
+       socket.emit('user typing', sessionStorage.getItem('nickName'));
+       socket.on('is typing', function (user) {
+           console.log(user);
+       })
+   };
+
+
 }());
 
 

@@ -34,6 +34,11 @@ io.on('connection', (socket) => {
     });
     socket.emit('chat history', messages);
 
+    socket.on('user typing', user=>{
+        console.log(user);
+        io.emit('is typing', `@${user} is typing...`)
+    });
+
     socket.on('disconnect', (reason) => {
         console.log("Disconected");
     });
