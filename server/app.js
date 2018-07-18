@@ -13,13 +13,23 @@ app.use(express.static("../client/view"));
 
 io.on('connection', (socket) => {
     console.log('Connection is opened');
-
+    socket.emit('new user id', socket.id);
     socket.on('new user', (nicknames) => {
         usernames.push(nicknames);
-        console.log(nicknames);
+        console.log(usernames);
+        usernames.forEach(item =>{
+            if(item.id===nicknames.id){
+                item.connectionStatus='just connected';
+                setTimeout(function(){
+                    item.connectionStatus='connected';
+                    io.emit('new users', usernames);
+                }, 60000);
+            }
+        })
+        io.emit('new users', usernames);
         console.log(usernames);
 
-        io.emit('new users', nicknames);
+        // io.emit('user connected', 'just added')
     });
     socket.emit('users list', usernames);
 
@@ -35,11 +45,11 @@ io.on('connection', (socket) => {
     socket.emit('chat history', messages);
 
     socket.on('user typing', user=>{
-        console.log(user);
         io.emit('is typing', `@${user} is typing...`)
     });
 
     socket.on('disconnect', (reason) => {
+        console.log(socket.id);
         console.log("Disconected");
     });
 });

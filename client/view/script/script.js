@@ -5,11 +5,20 @@
     const socket = io.connect({'sync disconnect on unload': true});
 
 
+socket.on('new user id', function (id) {
+    sessionStorage.setItem('id', id);
+});
     NameEnter(socket);
     socket.on('new users', function (user) {
-        createUsersList(user);
+        const chatMatesList = document.getElementById("chatmates-list");
+        chatMatesList.innerText='';
+        user.forEach(item => {
+            createUsersList(item);
+        });
     });
     socket.on('users list', function (users) {
+        const chatMatesList = document.getElementById("chatmates-list");
+        chatMatesList.innerText='';
         users.forEach(item => {
             createUsersList(item);
         })
@@ -68,7 +77,7 @@
         clearTimeout(timeout);
         timeout = setTimeout(function () {
             document.getElementsByClassName('typing-message')[0].remove()
-        }, 1500);
+        }, 1000);
     }
 
 
@@ -90,14 +99,8 @@ function NameEnter(socket) {
             sessionStorage.setItem('userName', userNameField.value);
             sessionStorage.setItem('nickName', nickNameField.value);
             popUp.style.display = 'none';
-            socket.emit('new user', {'username': userNameField.value, 'nickname': nickNameField.value});
-            // socket.on('new user', function (user) {
-            //     const userNameField = document.getElementById('messages-container');
-            //     userNameField.innerHTML = '';
-            //     user.forEach(item => {
-            //         createUsersList(item);
-            //     })
-            // });
+            socket.emit('new user', {'id':sessionStorage.getItem('id'), 'username': userNameField.value, 'nickname': nickNameField.value});
+
         } else {
             alert("Enter username and nickname");
         }
@@ -146,7 +149,6 @@ function createMessageViews(message, i) {
 
 function createUsersList(user) {
     const chatMatesList = document.getElementById("chatmates-list");
-
     const userWrapper = document.createElement('li');
 
     chatMatesList.appendChild(userWrapper);
