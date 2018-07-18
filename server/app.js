@@ -12,20 +12,22 @@ const MAX_AMOUNT = 100;
 app.use(express.static("../client/view"));
 
 io.on('connection', (socket) => {
+    let user={};
     console.log('Connection is opened');
-    socket.emit('new user id', socket.id);
+    // socket.emit('new user id', socket.id);
     socket.on('new user', (nicknames) => {
+        user=nicknames;
         usernames.push(nicknames);
         console.log(usernames);
         usernames.forEach(item =>{
-            if(item.id===nicknames.id){
+            if(item.nickname===nicknames.nickname){
                 item.connectionStatus='just connected';
                 setTimeout(function(){
                     item.connectionStatus='connected';
                     io.emit('new users', usernames);
                 }, 60000);
             }
-        })
+        });
         io.emit('new users', usernames);
         console.log(usernames);
 
@@ -48,8 +50,19 @@ io.on('connection', (socket) => {
         io.emit('is typing', `@${user} is typing...`)
     });
 
-    socket.on('disconnect', (reason) => {
-        console.log(socket.id);
+    socket.on('disconnect', () => {
+        usernames.forEach(item =>{
+            if(item.nickname===user.nickname){
+                item.connectionStatus='just disconnected';
+                setTimeout(function(){
+                    item.connectionStatus='disconnected';
+                    io.emit('new users', usernames);
+                }, 60000);
+            }
+        });
+        io.emit('new users', usernames);
+
+        // console.log(user);
         console.log("Disconected");
     });
 });

@@ -4,10 +4,10 @@
 
     const socket = io.connect({'sync disconnect on unload': true});
 
-
-socket.on('new user id', function (id) {
-    sessionStorage.setItem('id', id);
-});
+//
+// socket.on('new user id', function (id) {
+//     sessionStorage.setItem('id', id);
+// });
     NameEnter(socket);
     socket.on('new users', function (user) {
         const chatMatesList = document.getElementById("chatmates-list");
@@ -99,7 +99,7 @@ function NameEnter(socket) {
             sessionStorage.setItem('userName', userNameField.value);
             sessionStorage.setItem('nickName', nickNameField.value);
             popUp.style.display = 'none';
-            socket.emit('new user', {'id':sessionStorage.getItem('id'), 'username': userNameField.value, 'nickname': nickNameField.value});
+            socket.emit('new user', {'username': userNameField.value, 'nickname': nickNameField.value});
 
         } else {
             alert("Enter username and nickname");
@@ -150,6 +150,7 @@ function createMessageViews(message, i) {
 function createUsersList(user) {
     const chatMatesList = document.getElementById("chatmates-list");
     const userWrapper = document.createElement('li');
+    const userInfo
 
     chatMatesList.appendChild(userWrapper);
     console.log(user);
