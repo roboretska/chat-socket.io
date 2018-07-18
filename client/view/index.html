@@ -12,29 +12,38 @@
     <link href="style/popup.css" rel="stylesheet">
 </head>
 <body>
-<!--<div id="pop-up">-->
-<!--<div class="authorization-wrapper">-->
-<!--<h3>Enter to the chat</h3>-->
-<!--<div class="autho-fields">-->
-<!--<label for="username">User Name</label>-->
-<!--<input type="text" id="username">-->
-<!--<label for="nickname">User Nickname</label>-->
-<!--<input type="text" id="nickname">-->
-<!--</div>-->
-<!--<div class="button-wrapper">-->
-<!--<button>OK</button>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
+<div id="pop-up">
+    <div class="authorization-wrapper">
+        <h3>Enter to the chat</h3>
+        <div class="autho-fields">
+            <label for="username">User Name</label>
+            <input type="text" id="username-field">
+            <label for="nickname">User Nickname</label>
+            <input type="text" id="nickname-field">
+        </div>
+        <div class="button-wrapper">
+            <button id="nickname-submit">OK</button>
+        </div>
+    </div>
+</div>
 <div class="content-wrapper">
     <div class="chat-wrapper">
         <h3>Chat</h3>
         <div class="chat-view-wrapper">
-            <div class="member-list"></div>
-            <div class="messages-wrapper"></div>
+            <div class="member-list">
+                <ul id="chatmates-list"></ul>
+            </div>
+            <div class="messages-wrapper">
+                <ul id="messages-container"></ul>
+            </div>
         </div>
-        <div class="message-input-wrapper"></div>
+        <div class="message-input-wrapper">
+            <input id="message-input-field" type="text" placeholder="Message...">
+            <button id="message-input-button">Send</button>
+        </div>
     </div>
 </div>
 </body>
+<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+<script src="./script/script.js" rel="script"></script>
 </html>

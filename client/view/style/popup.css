@@ -3,7 +3,7 @@
     height: 100%;
     width: 100%;
     z-index: 45;
-    background-color: rgba(192,192,192, 0.5);
+    background-color: rgba(192,192,192, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,6 +33,7 @@
 
 .button-wrapper{
     padding: 5px;
+    background-color: #918e91;
 }
 .button-wrapper button{
     border: 1px solid #918e91;
@@ -40,6 +41,8 @@
     color: aliceblue;
     float:right;
     padding: 5px 10px;
+    background-color: #918e91;
+
 }
 
 .autho-fields input{

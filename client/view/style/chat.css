@@ -47,3 +47,53 @@
     background-color: #eb7267;
 
 }
+
+.message-input-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.message-input-wrapper input{
+    width: 80%;
+    padding: 10px;
+    height: 50px;
+
+}
+
+.message-input-wrapper button{
+    margin-left: -100px;
+    width: 100px;
+    height: 50px;
+
+}
+
+.messages-wrapper, .member-list{
+    overflow: scroll;
+}
+li{
+    list-style: none;
+}
+
+{
+    border: 3px solid #5c5c5e;
+    border-radius: 15px;
+    margin: 15px 5px;
+}
+
+#messages-container >li, #chatmates-list >li{
+    border: 1px solid #5c5c5e;
+    border-radius: 15px;
+    margin: 15px 5px;
+    padding: 10px 5px;
+}
+
+.left-side{
+    text-align: left;
+}
+.right-side{
+    text-align: right;
+}
+
+.private-message {
+    background-color: #918e91;
+}
