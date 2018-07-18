@@ -150,10 +150,16 @@ function createMessageViews(message, i) {
 function createUsersList(user) {
     const chatMatesList = document.getElementById("chatmates-list");
     const userWrapper = document.createElement('li');
-    const userInfo
+    const userInfo  = document.createElement('div');
+    const userLabel  = document.createElement('label');
+
 
     chatMatesList.appendChild(userWrapper);
+    userWrapper.appendChild(userInfo);
+    userWrapper.appendChild(userLabel);
+
     console.log(user);
-    userWrapper.innerHTML = user.username + "(@" + user.nickname + ")";
+    userInfo.innerHTML = user.username + "(@" + user.nickname + ")";
+    userLabel.innerHTML = user.connectionStatus;
 
 }
