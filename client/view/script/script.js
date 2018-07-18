@@ -152,6 +152,16 @@ function createUsersList(user) {
     const userWrapper = document.createElement('li');
     const userInfo  = document.createElement('div');
     const userLabel  = document.createElement('label');
+    if(user.connectionStatus==='just connected'){
+        userLabel.setAttribute('class', 'just-connected');
+
+    }else if(user.connectionStatus==='just disconnected'){
+        userLabel.setAttribute('class', 'just-disconnected');
+
+    }else {
+        userLabel.setAttribute('class', user.connectionStatus);
+    }
+
 
 
     chatMatesList.appendChild(userWrapper);

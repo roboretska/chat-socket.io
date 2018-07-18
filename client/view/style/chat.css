@@ -97,3 +97,29 @@ li{
 .private-message {
     background-color: #918e91;
 }
+
+
+.just-connected, .just-disconnected, .connected, .disconnected{
+    display: block;
+    margin: 5px;
+    padding: 10px 5px;
+}
+
+.just-connected{
+    background-color: rgba(114, 149,171,0.7);
+}
+.just-disconnected{
+    background-color: rgba(196, 73,57,0.7);
+}
+.connected{
+    background-color: rgba(102, 150,116,0.7);
+}
+.disconnected{
+    background-color: rgba(92, 92,94,0.7);
+
+}
+
+#chatmates-list>li div{
+    margin: 0 5px;
+    padding: 0 5px;
+}
